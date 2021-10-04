@@ -1,0 +1,52 @@
+.tab{
+    display: block;
+    width: 250px;
+    font-size: 30px;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    background-color: #2185D0;
+  }
+
+  .meal-tab {
+    text-decoration: none;
+    color: white;
+  }
+
+  .main {
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+#pic{
+    width: 500px;
+    height: 500px;
+    
+}
+  #pic img{
+    width: 400px;
+    height: 400px;
+    padding: 50px;
+  }
+
+  .info{
+      margin-left: 25%;
+  }
+
+  #name {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      margin-top: 50px;
+  }
+
+  #category{
+    font-size: 2rem;
+  }
+
+  #instruction{
+    margin-left: 5%;
+    margin-top: 5%;
+    font-size: 1.2rem;
+  }
+
+ 

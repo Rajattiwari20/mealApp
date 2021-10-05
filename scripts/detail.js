@@ -1,11 +1,12 @@
 let queryString = window.location.search;
 let urlParams = new URLSearchParams(queryString);
+// get recipeId
 let recipeId=urlParams.get('id');
 
 
 const getDetails=async (recipeId)=>{
     try{
-
+        //create dynamic url
         const res=await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`);
         const data=await res.json()
         showDetails(data);

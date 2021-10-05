@@ -1,22 +1,29 @@
+//get elements from ID
 var searchBar = document.getElementById("searchBar");
 var mealsList=document.getElementById("meals-list");
 var searchBtn=document.getElementById("search-btn");
 
+
+//get searched string
 searchBar.addEventListener('keyup',(e)=>{
     const searchString=e.target.value.toLowerCase();
     searchResult(searchString)
     
 })
 
+//add click event
 searchBtn.addEventListener('click',()=>{
     const searchString=searchBar.value.toLowerCase();
     searchResult(searchString)
 })
 
+//fetch data from meal url
 const searchResult=async (searchString)=>{
     try{
+        //create dynamic url
         const res= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchString}`);
         var result=await res.json();
+        //display the result
         displayResults(result.meals);
     } catch(err){
         console.error(err);
@@ -34,6 +41,7 @@ const displayResults=(meals)=>{
             if(localArray.indexOf(recipeId) !=-1 ){
                 isFav=true;
             }
+            //create dynamic li  
             return `<li class="meal">
             <img src="${meal.strMealThumb}" /img>
              <div class="meal-name" id="${meal.idMeal}">
@@ -48,7 +56,7 @@ const displayResults=(meals)=>{
    
 }
 
-function initializeLocalstorage(){
+function createLocalstorage(){
     let localArray = [];
     if(localStorage.getItem('favMeals') == null){
         //create a new localStorage
@@ -57,6 +65,7 @@ function initializeLocalstorage(){
 }
 
 mealsList.addEventListener('click',(e)=>{ 
+    //show recipe detail if user click on recipe-name
     if(e.target.className == 'recipe-name'){
         let recipeId= e.target.parentNode.id;
         window.open(`detail.html?id=${recipeId}`);
@@ -79,4 +88,4 @@ mealsList.addEventListener('click',(e)=>{
 })
 
 
-document.addEventListener('DOMContentLoaded',initializeLocalstorage);
+document.addEventListener('DOMContentLoaded',createLocalstorage);

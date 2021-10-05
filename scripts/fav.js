@@ -1,8 +1,10 @@
 let favMeals=JSON.parse(localStorage.getItem('favMeals'));
 var mealsList=document.getElementById("meals-list");
 
+//fetch data from mealId
 const fetchData=async (mealId)=>{
     try {
+        //create dynamic url
         let res=await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
         let result=await res.json();
         displayResults(result.meals[0]);
@@ -11,8 +13,8 @@ const fetchData=async (mealId)=>{
     }
 }
 
-const showFav=()=>{
-    
+const showFavourites=()=>{
+    //if there is no meal
     if(favMeals.length===0){
         mealsList.innerHTML='<h1>No Favourite Meals Present</h1>'
     }else{
@@ -25,6 +27,7 @@ const showFav=()=>{
 
 const displayResults=(meal)=>{
     let isFav=true;
+    //create dynamic li 
     mealsList.innerHTML +=`<li class="meal">
     <img src="${meal.strMealThumb}" /img>
      <div class="meal-name" id="${meal.idMeal}">
@@ -34,7 +37,10 @@ const displayResults=(meal)=>{
      </li>`;
 }
 
+
+
 mealsList.addEventListener('click',(e)=>{
+    //show recipe detail if user click on recipe-name
     if(e.target.className == 'recipe-name'){
         let recipeId=e.target.parentNode.id;
         window.open(`detail.html?id=${recipeId}`);
@@ -45,10 +51,10 @@ mealsList.addEventListener('click',(e)=>{
         localStorage.setItem('favMeals',JSON.stringify(localArray));
         favMeals=JSON.parse(localStorage.getItem('favMeals'));
         alert('Removed From Favourites');
-        showFav();
+        showFavourites();
     }
 })
 
-
-showFav();
+//call showDavourites
+showFavourites();
 
